@@ -1,4 +1,4 @@
-package com.msa.repository;
+package com.msa.social.repository;
 
 import java.util.List;
 

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.msa.social.repository.rest.FollowRestRepository;
+import com.msa.social.service.FollowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,10 @@ public class UserServiceImpl implements UserService {
 	AuthService authService;
 	
 	@Autowired
-	FollowService followService;
+    FollowService followService;
+
+	@Autowired
+	FollowRestRepository followRestRepository;
 
 	public User addUser(String username, String password) {
 		User user = new User(username, password);
@@ -53,7 +58,9 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUserListWithFollowInfo(Long userId, List<Long> userIdList) {
 		List<User> userList = userRepository.findByIdIn(userIdList);
 		
-		List<Follow> followList = followService.getFolloweeList(userId, userIdList);
+		//List<Follow> followList = followService.getFolloweeList(userId, userIdList);
+		List<Follow> followList = followRestRepository.getFolloweeList(userId, userIdList);
+
 		List<Long> followeeIdList = followList.stream().map(f -> f.getFolloweeId()).collect(Collectors.toList());
 		
 		for(User user : userList) {

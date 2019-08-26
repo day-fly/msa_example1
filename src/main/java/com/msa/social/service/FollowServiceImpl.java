@@ -1,4 +1,4 @@
-package com.msa.service;
+package com.msa.social.service;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msa.domain.Follow;
-import com.msa.repository.FollowRepository;
+import com.msa.social.repository.FollowRepository;
 
 @Service
 public class FollowServiceImpl implements FollowService {

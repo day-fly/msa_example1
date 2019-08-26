@@ -1,4 +1,4 @@
-package com.msa.service;
+package com.msa.social.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.msa.domain.Feed;
 import com.msa.domain.Follow;
-import com.msa.repository.FeedRepository;
+import com.msa.social.repository.FeedRepository;
 
 @Service
 public class FeedServiceImpl implements FeedService {

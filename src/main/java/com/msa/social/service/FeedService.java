@@ -1,4 +1,4 @@
-package com.msa.service;
+package com.msa.social.service;
 
 import java.util.List;
 

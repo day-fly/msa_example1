@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.msa.social.repository.rest.FeedRestRepository;
+import com.msa.social.service.FeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -19,10 +21,13 @@ import com.msa.repository.UserRepository;
 public class PostServiceImpl implements PostService {
 
 	@Autowired
+	FeedRestRepository feedRestRepository;
+
+	@Autowired
 	PostRepository postRepository;
 	
 	@Autowired
-	FeedService feedService;
+    FeedService feedService;
 	
 	@Autowired
 	UserService userService;
@@ -35,8 +40,9 @@ public class PostServiceImpl implements PostService {
 		Post newPost = new Post(userId, title, content);
 		
 		Post result = postRepository.save(newPost);
-		
-		feedService.addFeeds(userId, result.getId());
+
+		feedRestRepository.addFeeds(userId, result.getId());
+		//feedService.addFeeds(userId, result.getId());
 		
 		return result;
 	}
@@ -81,7 +87,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> getPostListByFeed(Long userId) {
-		List<Feed> feedList = feedService.getFeedList(userId);
+		//List<Feed> feedList = feedService.getFeedList(userId);
+		List<Feed> feedList = feedRestRepository.getFeedList(userId);
 		
 		List<Long> postIdList = feedList.stream().map(f -> f.getPostId()).collect(Collectors.toList());
 		

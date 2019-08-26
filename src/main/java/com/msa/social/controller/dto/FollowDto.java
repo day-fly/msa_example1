@@ -1,4 +1,4 @@
-package com.msa.controller.dto;
+package com.msa.social.controller.dto;
 
 public class FollowDto {
 	private Long followeeId;
